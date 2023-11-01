@@ -1,10 +1,7 @@
-from django.http import HttpResponse
 from django.shortcuts import render
-from . import models
-def hello(request):
-    return HttpResponse('<h1>HelloWorld</h1>')
+from blog.models import Post
 
-
-def blog_all(request):
-    post = models.Post.objects.all()
-    return render(request, 'post_list.html', {'post': post})
+def post_view(request):
+    if request.method == "GET":
+        post = Post.objects.all()
+        return render(request, 'post.html', {"post_key":post})
